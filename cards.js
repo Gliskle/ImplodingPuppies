@@ -51,4 +51,4 @@ const cards = [
     }
 ];
 
-module.exports = cards;
+window.cards = cards;
