@@ -19,7 +19,7 @@ function preload ()
 function create ()
 {
     this.add.text(0, 0, 'hello world again')
-    this.add.text(0, 0, 'you are a dog')
+    this.add.text(0, 10, 'you are a dog')
 }
 
 function update ()
