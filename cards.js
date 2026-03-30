@@ -3,7 +3,6 @@ const cards = [
         title: "Imploding Puppy",
         desc: "Show this card imediatly. Unless you have a Defuse or a Deflect, you are dead",
         type: "imploding-puppy"
-        count: NumOfPlayers - 1
     },
     {
         title: "Defuse",
