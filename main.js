@@ -20,10 +20,10 @@ function create ()
 {
     const lineHeight = 17;
     let lines = 0;
-    this.add.text(0, lineHeight * lines++, 'hello world');
-    for (let i = 0; i < cards.length; i++) {
-        this.add.text(0, lineHeight * lines++, cards[i].title);
-    }
+    // this.add.text(0, lineHeight * lines++, 'hello world');
+    // for (let i = 0; i < cards.length; i++) {
+    //    this.add.text(0, lineHeight * lines++, cards[i].title);
+    // }
 }
 
 function update ()
