@@ -1,4 +1,4 @@
-var cards = [
+export const cards = [
     {
         title: "Imploding Puppy",
         desc: "Show this card imediatly. Unless you have a diffuse",
