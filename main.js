@@ -18,7 +18,7 @@ function preload ()
 
 function create ()
 {
-    const lineHeight = 15;
+    const lineHeight = 17;
     let lines = 0;
     this.add.text(0, lineHeight * lines++, 'hello world');
     for (let i = 0; i < cards.length; i++) {
