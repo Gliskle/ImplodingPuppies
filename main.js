@@ -18,8 +18,12 @@ function preload ()
 
 function create ()
 {
-    this.add.text(0, 0, 'hello world again')
-    this.add.text(0, 10, 'you are a dog')
+    const lineHeight = 15;
+    let lines = 0;
+    this.add.text(0, lineHeight * lines++, 'hello world');
+    for (let i = 0; i < cards.length; i++) {
+        this.add.text(0, lineHeight * lines++, cards[i].title);
+    }
 }
 
 function update ()
