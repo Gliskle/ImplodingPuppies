@@ -1,4 +1,4 @@
-export const cards = [
+const cards = [
     {
         title: "Imploding Puppy",
         desc: "Show this card imediatly. Unless you have a Defuse or a Deflect, you are dead",
@@ -25,9 +25,6 @@ export const cards = [
         desc: "Choose a player to swap hands with",
         type: "swap"
     },
-    {
-        title: "",
-        desc: "",
-        type: ""
-    },
-]
+];
+
+module.exports = cards;
