@@ -13,7 +13,7 @@ var game = new Phaser.Game(config);
 
 function preload ()
 {
-    this.add.text()
+    this.add.text("text")
 }
 function create ()
 {
