@@ -63,64 +63,63 @@ const cards = [
 
 window.cards = cards;
 
-function shuffleDeck(shuffleCards) {
-    const deck = cards.flatMap(shuffleCards =>
-        Array(shuffleCards.count).fill(shuffleCards.id)
-    );
+function dealAndReshuffle(shuffledCards, numPlayers = 2, cardsPerPlayer = 7) {
+    const hands = Array.from({ length: numPlayers }, () => []);
 
-    // Fisher-Yates shuffle
-    for (let i = deck.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [deck[i], deck[j]] = [deck[j], deck[i]];
-    }
+    let tempDeck = [];
 
-    return deck;
-}
-
-function shuffleDeckNoImploding(shuffleCards) {
-    const deck = [];
-
-    for (let card of shuffleCards) {
+    for (let card of shuffledCards) {
         if (card.id === "implodingPuppy") continue;
 
         let count = card.count;
 
         if (card.id === "defuse") {
-            count -= 2;
+            count -= numPlayers;
         }
 
         for (let i = 0; i < count; i++) {
-            deck.push(card.id);
+            tempDeck.push(card.id);
         }
     }
 
-    for (let i = deck.length - 1; i > 0; i--) {
+    for (let i = tempDeck.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
-        [deck[i], deck[j]] = [deck[j], deck[i]];
+        [tempDeck[i], tempDeck[j]] = [tempDeck[j], tempDeck[i]];
     }
 
-    return deck;
-}
+    const usedCards = {};
 
-function dealCardsWithDefuse(deck, numPlayers = 2, cardsPerPlayer = 7) {
-
-    const hands = Array.from({ length: numPlayers }, () => []);
     for (let i = 0; i < cardsPerPlayer; i++) {
         for (let p = 0; p < numPlayers; p++) {
-            if (deck.length === 0) {
-                throw new Error("Not enough cards to deal");
-            }
+            const card = tempDeck.shift();
+            hands[p].push(card);
 
-            hands[p].push(deck.shift());
+            usedCards[card] = (usedCards[card] || 0) + 1;
         }
     }
 
     for (let p = 0; p < numPlayers; p++) {
-        hands[p].push(2);
+        hands[p].push("defuse");
+        usedCards[2] = (usedCards[2] || 0) + 1;
+    }
+
+  let newDeck = [];
+
+    for (let card of cards) {
+        let remaining = card.count - (usedCards[card.id] || 0);
+
+        for (let i = 0; i < remaining; i++) {
+            newDeck.push(card.id);
+        }
+    }
+
+    for (let i = newDeck.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [newDeck[i], newDeck[j]] = [newDeck[j], newDeck[i]];
     }
 
     return {
         hands,
-        remainingDeck: deck
+        deck: newDeck
     };
 }

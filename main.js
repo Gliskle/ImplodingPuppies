@@ -57,8 +57,10 @@ function create ()
        startButton.setOrigin(0,0)
        startButton.setText("New Game")
 
-       console.log(shuffleDeckNoImploding(cards))
-       console.log(dealCardsWithDefuse())
+       const { hands, deck } = dealAndReshuffle(cards)
+
+       console.log(hands)
+       console.log(deck)
     }
 }
 
