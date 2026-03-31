@@ -11,6 +11,9 @@ const config = {
 
 const game = new Phaser.Game(config);
 
+const lineHeight = 17;
+let lines = 0;
+
 function preload ()
 {
 
@@ -18,16 +21,15 @@ function preload ()
 
 function create ()
 {
-    const lineHeight = 17;
-    let lines = 0;
+
     // this.add.text(0, lineHeight * lines++, 'hello world');
     // for (let i = 0; i < cards.length; i++) {
     //    this.add.text(0, lineHeight * lines++, cards[i].title);
     // }
-    class Example extends Phaser.Scene
-    {
-        create ()
-        {
+ //   class Example extends Phaser.Scene
+ //   {
+  //      create ()
+  //      {
             const startButton = this.add.text(100, 150, 'Start Game', {
                 fontSize: '32px',
                 color: '#ffffff',
@@ -49,9 +51,10 @@ function create ()
             });
 
             startButton.on('pointerup', () => {
-            })
-        }
-    }
+                startGame ();
+            });
+ //       }
+ //   }
 
     const bconfig = {
         type: Phaser.AUTO,
@@ -67,4 +70,9 @@ function create ()
 function update ()
 {
 
+}
+
+function startGame ()
+{
+    this.add.text(0, lineHeight * lines++, Click);
 }
