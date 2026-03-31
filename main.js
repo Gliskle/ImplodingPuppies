@@ -49,10 +49,6 @@ function create ()
             });
 
             startButton.on('pointerup', () => {
-                create ()
-                {
-                    const numPlayers = this.add.text()
-                }
             })
         }
     }
