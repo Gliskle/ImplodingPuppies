@@ -28,10 +28,11 @@ function create ()
     {
         create ()
         {
-            const startButton = this.add.text(100, 100, 'Start Game', {
+            const startButton = this.add.text(100, 150, 'Start Game', {
                 fontSize: '32px',
                 color: '#ffffff',
                 align: 'center',
+                textAlign: 'center',
                 fixedWidth: 500,
                 backgroundColor: '#2d2d2d',
                 borderRadius: '10px'
