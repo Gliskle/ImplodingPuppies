@@ -59,8 +59,33 @@ function create ()
 
        const { hands, deck } = dealAndReshuffle(cards)
 
-       console.log(hands)
-       console.log(deck)
+       console.log( { hands, deck })
+
+       const drawPile = this.drawPile = this.add.text(600, 450, 'Pick Up Card', {
+            fontSize: '25px',
+            color: '#ffffff',
+            align: 'center',
+            fixedWidth: 260,
+            backgroundColor: '#2d2d2d'
+       }).setPadding(32).setOrigin(0.5);
+
+       this.drawPile.setInteractive({ useHandCursor: true});
+
+       this.drawPile.on('pointerover', () => {
+        this.drawPile.setBackgroundColor('#8d8d8d')
+       });
+
+       this.drawPile.on('pointerout', () => {
+        this.drawPile.setBackgroundColor('#2d2d2d')
+       });
+
+       this.drawPile.on('pointerdown', () => {
+        this.drawPile.setBackgroundColor('#4d4d4d')
+       });
+
+       this.drawPile.on('pointerup', () => {
+        this.drawPile.setBackgroundColor('#8d8d8d')
+       });
     }
 }
 
