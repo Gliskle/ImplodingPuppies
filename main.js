@@ -13,6 +13,8 @@ const game = new Phaser.Game(config);
 
 const lineHeight = 17;
 let lines = 0;
+let centerX = this.cameras.main.width / 2;
+let centerY = this.cameras.main.height / 2;
 
 function preload ()
 {
@@ -21,50 +23,43 @@ function preload ()
 
 function create ()
 {
+    const startButton = this.startButton = this.add.text(600, 450, 'Play Game', {
+        fontSize: '32px',
+        color: '#ffffff',
+        align: 'center',
+        fixedWidth: 260,
+        backgroundColor: '#2d2d2d'
+    }).setPadding(32).setOrigin(0.5);
 
-    // this.add.text(0, lineHeight * lines++, 'hello world');
-    // for (let i = 0; i < cards.length; i++) {
-    //    this.add.text(0, lineHeight * lines++, cards[i].title);
-    // }
- //   class Example extends Phaser.Scene
- //   {
-  //      create ()
-  //      {
-            const startButton = this.add.text(100, 100, 'Start Game', {
-                fontSize: '32px',
-                color: '#ffffff',
-                align: 'center',
-                textAlign: 'center',
-                fixedWidth: 500,
-                backgroundColor: '#2d2d2d',
-                borderRadius: '10px'
-            }).setPadding(32).setOrigin(0.5);
+    this.startButton.setInteractive({ useHandCursor: true });
 
-            startButton.setInteractive({ useHandCursor: true });
+    this.startButton.on('pointerover', () => {
+        this.startButton.setBackgroundColor('#8d8d8d');
+    });
 
-            startButton.on('pointerover', () => {
-                startButton.setBackgroundColor('#8d8d8d');
-            });
+    this.startButton.on('pointerout', () => {
+        this.startButton.setBackgroundColor('#2d2d2d');
+    });
 
-            startButton.on('pointerout', () => {
-                startButton.setBackgroundColor('#2d2d2d');
-            });
+    this.startButton.on('pointerdown', () => {
+        this.startButton.setBackgroundColor("#4d4d4d")
+    });
 
-            startButton.on('pointerup', () => {
-                startGame ();
-            });
- //       }
- //   }
+    this.startButton.on('pointerup', () => {
+        this.startButton.setBackgroundColor("#8d8d8d")
+        startGame()
+    });
 
-    const bconfig = {
-        type: Phaser.AUTO,
-        parent: 'phaser-example',
-        width: 800,
-        height: 600,
-        scene: Example
-    };
+    function startGame ()
+    {
+       startButton.setScale(0.5)
+       startButton.setPosition(0,0)
+       startButton.setOrigin(0,0)
+       startButton.setText("New Game")
 
-    const game = new Phaser.Game(bconfig);
+       deal(cards)
+       console.log (cards)
+    }
 }
 
 function update ()
@@ -72,7 +67,3 @@ function update ()
 
 }
 
-function startGame ()
-{
-    this.add.text(0, lineHeight * lines++, Click);
-}
