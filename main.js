@@ -28,7 +28,7 @@ function create ()
     {
         create ()
         {
-            const button = this.add.text(400, 300, 'Play Game', {
+            const button = this.add.text(40, 30, 'Play Game', {
                 fontSize: '32px',
                 color: '#ffffff',
                 align: 'center',
