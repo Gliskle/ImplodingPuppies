@@ -28,7 +28,7 @@ function create ()
     {
         create ()
         {
-            const startButton = this.add.text(30, 100, 'Play Game', {
+            const startButton = this.add.text(100, 100, 'Start Game', {
                 fontSize: '32px',
                 color: '#ffffff',
                 align: 'center',
@@ -49,11 +49,14 @@ function create ()
 
             startButton.on('pointerup', () => {
                 create ()
+                {
+                    const numPlayers = this.add.text()
+                }
             })
         }
     }
 
-    const config = {
+    const bconfig = {
         type: Phaser.AUTO,
         parent: 'phaser-example',
         width: 800,
@@ -61,7 +64,7 @@ function create ()
         scene: Example
     };
 
-    const game = new Phaser.Game(config);
+    const game = new Phaser.Game(bconfig);
 }
 
 function update ()
