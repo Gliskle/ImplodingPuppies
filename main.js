@@ -30,7 +30,7 @@ function create ()
  //   {
   //      create ()
   //      {
-            const startButton = this.add.text(100, 150, 'Start Game', {
+            const startButton = this.add.text(100, 100, 'Start Game', {
                 fontSize: '32px',
                 color: '#ffffff',
                 align: 'center',
