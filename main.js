@@ -28,24 +28,28 @@ function create ()
     {
         create ()
         {
-            const button = this.add.text(40, 30, 'Play Game', {
+            const startButton = this.add.text(30, 100, 'Play Game', {
                 fontSize: '32px',
                 color: '#ffffff',
                 align: 'center',
-                fixedWidth: 260,
+                fixedWidth: 500,
                 backgroundColor: '#2d2d2d',
-                borderRadius: '8px'
+                borderRadius: '10px'
             }).setPadding(32).setOrigin(0.5);
 
-            button.setInteractive({ useHandCursor: true });
+            startButton.setInteractive({ useHandCursor: true });
 
-            button.on('pointerover', () => {
-            button.setBackgroundColor('#8d8d8d');
+            startButton.on('pointerover', () => {
+                startButton.setBackgroundColor('#8d8d8d');
             });
 
-            button.on('pointerout', () => {
-                button.setBackgroundColor('#2d2d2d');
+            startButton.on('pointerout', () => {
+                startButton.setBackgroundColor('#2d2d2d');
             });
+
+            startButton.on('pointerup', () => {
+                create ()
+            })
         }
     }
 
