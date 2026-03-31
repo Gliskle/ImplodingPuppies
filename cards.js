@@ -2,86 +2,125 @@ const cards = [
     {
         title: "Imploding Puppy",
         desc: "Show this card imediatly. Unless you have a Defuse or a Deflect, you are dead.",
-        type: "imploding-puppy",
+        id: "implodingPuppy",
         count: 1
     },
     {
         title: "Defuse",
         desc: "If you picked up an Imploding Puppy, you may play this card and shuffle it back into the deck without exploding and end your turn.",
-        type: "defuse",
+        id: "defuse",
         count: 3
     },
     {
         title: "Deflect",
         desc: "If you picked up an Imploding Puppy, you may deflect the Imploding Puppy to another player and the turn goes to them.",
-        type: "deflect",
+        id: "deflect",
         count: 1
     },
     {
         title: "Guardian Angel",
         desc: "When a player tries to play a card directed to you, you may play this card and the card they played will be directed toward them. Once dealt with, the turn will return to them.",
-        type: "guardian-angel",
+        id: "guardianAngel",
         count: 5
     },
     {
         title: "Swap",
         desc: "Choose a player to swap hands with. You may continue your turn with their cards.",
-        type: "swap",
+        id: "swap",
         count: 3
     },
     {
         title: "Hand out",
         desc: "Pass the top card of the deck to another player. End your turn.",
-        type: "hand-out",
+        id: "handOut",
         count: 4
     },
     {
         title: "Skip",
         desc: "End your turn without picking up any cards.",
-        type: "skip",
+        id: "skip",
         count: 5
     },
     {
         title: "Shuffle",
         desc: "Shuffle the deck.",
-        type: "shuffle",
+        id: "shuffle",
         count: 6
     },
     {
         title: "Draw Anywhere",
         desc: "Pick up from anywhere in the deck.",
-        type: "draw-anywhere",
+        id: "drawAnywhere",
         count: 5
     },
     {
         title: "Hot Dawg",
         desc: "Take a card from another player.",
-        type: "hot-dawg",
+        id: "hotDawg",
         count: 5
     }
 ];
 
 window.cards = cards;
 
-function expand(cardsWithCounts) {
-    const expanded = [];
-// to do
-    return expanded
-}
+function shuffleDeck(shuffleCards) {
+    const deck = cards.flatMap(shuffleCards =>
+        Array(shuffleCards.count).fill(shuffleCards.id)
+    );
 
-function shuffle(expandedArray) {
-    const shuffledDeck = [];
-// to do
+    // Fisher-Yates shuffle
+    for (let i = deck.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [deck[i], deck[j]] = [deck[j], deck[i]];
     }
-    return shuffledDeck;
+
+    return deck;
 }
 
-function deal() {
-    const results = {
-        player1: [],
-        player2: [],
-        drawPile: []
+function shuffleDeckNoImploding(shuffleCards) {
+    const deck = [];
+
+    for (let card of shuffleCards) {
+        if (card.id === "implodingPuppy") continue;
+
+        let count = card.count;
+
+        if (card.id === "defuse") {
+            count -= 2;
+        }
+
+        for (let i = 0; i < count; i++) {
+            deck.push(card.id);
+        }
+    }
+
+    for (let i = deck.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [deck[i], deck[j]] = [deck[j], deck[i]];
+    }
+
+    return deck;
+}
+
+function dealCardsWithDefuse(deck, numPlayers = 2, cardsPerPlayer = 7) {
+
+    const hands = Array.from({ length: numPlayers }, () => []);
+    for (let i = 0; i < cardsPerPlayer; i++) {
+        for (let p = 0; p < numPlayers; p++) {
+            if (deck.length === 0) {
+                throw new Error("Not enough cards to deal");
+            }
+
+            hands[p].push(deck.shift());
+        }
+    }
+
+    for (let p = 0; p < numPlayers; p++) {
+        hands[p].push(2);
+    }
+
+    return {
+        hands,
+        remainingDeck: deck
     };
-// to do
-    return results
 }
