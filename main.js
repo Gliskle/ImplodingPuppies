@@ -1,7 +1,7 @@
 const config = {
     type: Phaser.AUTO,
-    width: 800,
-    height: 600,
+    width: 1920,
+    height: 1080,
     scene: {
         preload: preload,
         create: create,
@@ -11,19 +11,22 @@ const config = {
 
 const game = new Phaser.Game(config);
 
-const lineHeight = 17;
-let lines = 0;
-let centerX = this.cameras.main.width / 2;
-let centerY = this.cameras.main.height / 2;
+let player1Hand = [];
+let player2Hand = [];
+let currentDeck = [];
+let turn = "player1";
+let discardPile = [];
+let newGame = false;
+
 
 function preload ()
 {
-
+    
 }
 
 function create ()
 {
-    const startButton = this.startButton = this.add.text(600, 450, 'Play Game', {
+    const startButton = this.startButton = this.add.text(960, 540, 'Play Game', {
         fontSize: '32px',
         color: '#ffffff',
         align: 'center',
@@ -47,50 +50,61 @@ function create ()
 
     this.startButton.on('pointerup', () => {
         this.startButton.setBackgroundColor("#8d8d8d")
-        startGame()
+        newGame = true;
     });
+}
 
-    function startGame ()
-    {
-       startButton.setScale(0.5)
-       startButton.setPosition(0,0)
-       startButton.setOrigin(0,0)
-       startButton.setText("New Game")
+function update ()
+{
+    if (newGame == true){
+        newGame = false;
+        this.startButton.setScale(0.5)
+        this.startButton.setPosition(0,0)
+        this.startButton.setOrigin(0,0)
+        this.startButton.setText("New Game")
 
-       const { hands, deck } = dealAndReshuffle(cards)
+        const { hands, deck } = dealAndReshuffle(cards)
 
-       console.log( { hands, deck })
+        player1Hand = hands[0];
+        player2Hand = hands[1];
+        currentDeck = deck;
 
-       const drawPile = this.drawPile = this.add.text(600, 450, 'Pick Up Card', {
+        console.log( { player1Hand, player2Hand, currentDeck })
+        console.log(currentDeck[0])
+
+        const drawPile = this.drawPile = this.add.text(960, 540, 'Pick Up Card', {
             fontSize: '25px',
             color: '#ffffff',
             align: 'center',
             fixedWidth: 260,
             backgroundColor: '#2d2d2d'
-       }).setPadding(32).setOrigin(0.5);
+        }).setPadding(32).setOrigin(0.5);
 
-       this.drawPile.setInteractive({ useHandCursor: true});
+        this.drawPile.setInteractive({ useHandCursor: true});
 
-       this.drawPile.on('pointerover', () => {
-        this.drawPile.setBackgroundColor('#8d8d8d')
-       });
+        this.drawPile.on('pointerover', () => {
+            this.drawPile.setBackgroundColor('#8d8d8d')
+        });
 
-       this.drawPile.on('pointerout', () => {
-        this.drawPile.setBackgroundColor('#2d2d2d')
-       });
+        this.drawPile.on('pointerout', () => {
+            this.drawPile.setBackgroundColor('#2d2d2d')
+        });
 
-       this.drawPile.on('pointerdown', () => {
-        this.drawPile.setBackgroundColor('#4d4d4d')
-       });
+        this.drawPile.on('pointerdown', () => {
+            this.drawPile.setBackgroundColor('#4d4d4d')
+        });
 
-       this.drawPile.on('pointerup', () => {
-        this.drawPile.setBackgroundColor('#8d8d8d')
-       });
+        this.drawPile.on('pointerup', () => {
+            this.drawPile.setBackgroundColor('#8d8d8d')
+        });
+
+        const player1Turn = this.player1Turn = this.add.text(1775, 30, 'Player1 (YOU)', {
+            fontSize: '30px',
+            color: '#ffffff',
+            align: 'center'
+        }).setOrigin(0.5);
     }
 }
 
-function update ()
-{
 
-}
 

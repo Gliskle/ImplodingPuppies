@@ -123,3 +123,6 @@ function dealAndReshuffle(shuffledCards, numPlayers = 2, cardsPerPlayer = 7) {
         deck: newDeck
     };
 }
+
+
+
