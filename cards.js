@@ -13,14 +13,14 @@ const cards = [
     },
     {
         title: "Deflect",
-        desc: "If you picked up an Imploding Puppy, you may deflect the Imploding Puppy to another player and the turn goes to them.",
+        desc: "If you picked up an Imploding Puppy, you may deflect the Imploding Puppy to another player and the turn goes to them. This card can not be defended by a Guardian Angel",
         id: "deflect",
         count: 1
     },
     {
         title: "Guardian Angel",
         desc: "When a player tries to play a card directed to you, you may play this card and the card they played will be directed toward them. Once dealt with, the turn will return to them.",
-        id: "guardianAngel",
+        id: "guardian\nAngel",
         count: 5
     },
     {
@@ -50,7 +50,7 @@ const cards = [
     {
         title: "Draw Anywhere",
         desc: "Pick up from anywhere in the deck.",
-        id: "drawAnywhere",
+        id: "draw\nAnywhere",
         count: 4
     },
     {
@@ -62,7 +62,7 @@ const cards = [
     {
         title: "See the Future",
         desc: "See the top three cards of the deck",
-        id: "seeTheFuture",
+        id: "seeThe\nFuture",
         count: 6
     }
 ];
