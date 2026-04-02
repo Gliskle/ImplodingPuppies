@@ -45,19 +45,25 @@ const cards = [
         title: "Shuffle",
         desc: "Shuffle the deck.",
         id: "shuffle",
-        count: 6
+        count: 7
     },
     {
         title: "Draw Anywhere",
         desc: "Pick up from anywhere in the deck.",
         id: "drawAnywhere",
-        count: 5
+        count: 4
     },
     {
         title: "Hot Dawg",
         desc: "Take a card from another player.",
         id: "hotDawg",
-        count: 5
+        count: 7
+    },
+    {
+        title: "See the Future",
+        desc: "See the top three cards of the deck",
+        id: "seeTheFuture",
+        count: 6
     }
 ];
 

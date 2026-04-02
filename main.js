@@ -53,11 +53,11 @@ function create ()
         newGame = true;
     });
 
-    this.drawPile = this.add.text(960, 540, 'Pick Up Card', {
-        fontSize: '25px',
+    this.drawPile = this.add.text(980, 540, 'Draw\nPile', {
+        fontSize: '24px',
         color: '#ffffff',
-        align: 'center',
-        fixedWidth: 260,
+        fixedWidth: 100,
+        fixedHeight: 125,
         backgroundColor: '#2d2d2d',
     }).setPadding(32).setOrigin(0.5);
 
@@ -74,6 +74,21 @@ function create ()
 
     this.drawPile.on('pointerdown', () => {
         this.drawPile.setBackgroundColor('#4d4d4d')
+        if (turn == "player1"){
+            if (currentDeck.length !== 0){
+                player1Hand.push(currentDeck.shift())
+                console.log(player1Hand)
+                turn = "player2"
+                this.player1.setColor("#ffffff")
+                this.player2.setColor("#8de8ff")
+            }
+            else {
+                console.error("No cards to draw from")
+            }
+        }
+        else{
+            console.error("Not your turn")
+        }
     });
 
     this.drawPile.on('pointerup', () => {
@@ -85,14 +100,35 @@ function create ()
         color: '#ffffff',
         align: 'center',
     });
-    player1.setVisible(false)
+    this.player1.setVisible(false)
 
-    const player2 = this.player2 = this.add.text(1650, 83, 'Player2', {
+    const player2 = this.player2= this.add.text(1650, 83, 'Player2', {
         fontSize: '30px',
         color: '#ffffff',
         align: 'center',
     });
-    player2.setVisible(false)
+    this.player2.setVisible(false)
+
+    const playerHand = this.playerHand = this.add.text(960, 850, 'Your Hand', {
+        fontSize: '32px',
+        color: '#ffffff',
+        align: 'center',
+    }).setOrigin(0.5);
+    this.playerHand.setVisible(false)
+    this.playerHand.setInteractive({useHandCursor: true });
+
+    this.playerHand.on('pointerup', () => {
+        
+    })
+
+    const discardPile = this.discardPile = this.add.text(860, 540, 'Pile', {
+        fontSize: '24px',
+        color: '#ffffff',
+        fixedWidth: 100,
+        fixedHeight: 125,
+        backgroundColor: '#2d2d2d',
+    }).setPadding(32).setOrigin(0.5);
+    this.discardPile.setVisible(false)
 }
 
 function update ()
@@ -106,6 +142,11 @@ function update ()
         this.drawPile.setVisible(true)
         this.player1.setVisible(true)
         this.player2.setVisible(true)
+        this.player1.setColor("#8de8ff")
+        this.player2.setColor("#ffffff")
+        this.playerHand.setVisible(true)
+        this.discardPile.setVisible(true)
+        turn = "player1"
 
         const { hands, deck } = dealAndReshuffle(cards)
 
@@ -115,27 +156,13 @@ function update ()
 
         console.log( { player1Hand, player2Hand, currentDeck })
         console.log(currentDeck[0])
-
-        if (turn == "player1"){
-            this.player1.setColor("#8de8ff")
-        }
-        else {
-            this.player1.setColor("#ffffff")
-        }
-
-        
-
-        if (turn == "player2"){
-            this.player2.setColor("#8de8ff")
-        }
-        else {
-            this.player2.setColor("#ffffff")
-        }
     }
 
     this.player1.setText(`Player1 (YOU)\n${player1Hand.length} Cards`)
     this.player2.setText(`Player2      \n${player2Hand.length} Cards`)
+    this.playerHand.setText(`${player1Hand}`)
 }
+
 
 
 
