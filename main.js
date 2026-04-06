@@ -157,6 +157,16 @@ function update ()
     if (redrawCards == true){
         this.playerHand.removeAll();
         const cardWidth = 110;
+        if (discardPile.length){
+            this.discardPile.setText(discardPile[discardPile.length - 1])
+        }
+
+        function clickHandler(){
+            const clickedCard = this.text;
+            discardPile.push(clickedCard);
+            player1Hand.splice(player1Hand.indexOf(clickedCard), 1);
+            redrawCards = true;
+        }
         
         for (let i = 0; i < player1Hand.length; i++){
             let thisText = this.add.text(i * cardWidth,0,player1Hand[i],{
@@ -168,6 +178,8 @@ function update ()
                 fixedHeight: 125
             }).setOrigin(0.5).setPadding({left: 20, top: 20});
             this.playerHand.add(thisText)
+            thisText.setInteractive({useHandCursor: true});
+            thisText.on("pointerup",clickHandler)
         }
         redrawCards = false;
     }
